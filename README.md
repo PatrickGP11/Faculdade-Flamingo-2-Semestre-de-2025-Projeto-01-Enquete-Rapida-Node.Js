@@ -1,12 +1,12 @@
-# 🔗 Projeto: Agregador de Links (Meu Linktree)
+# 📊 Projeto: Enquete Rápida (Full-Stack)
 
  
 
-Uma aplicação Full-Stack completa que funciona como um gerenciador de links pessoais (similar ao Linktree). O projeto implementa um **CRUD (Create, Read, Update, Delete)** completo.
+Um projeto de aula prático que demonstra uma aplicação Full-Stack completa, projetada para funcionar em dispositivos móveis (Web App Responsivo).
 
  
 
-Este projeto foi desenvolvido com foco em demonstrar uma API RESTful completa e sua interação com um frontend de JavaScript puro (Vanilla JS).
+A aplicação permite que usuários votem em uma enquete simples e vejam os resultados em tempo real.
 
  
 
@@ -26,49 +26,47 @@ Este projeto foi desenvolvido com foco em demonstrar uma API RESTful completa e 
 
 * **Frontend:**
 
-    * HTML5
+    * HTML5 (Estrutura)
 
-    * CSS3 (Mobile-First com Flexbox)
+    * CSS3 (Estilização Mobile-First)
 
-    * JavaScript (ES6+ com `fetch` e `async/await`)
-
- 
-
-## ⭐️ Funcionalidades
+    * JavaScript (ES6+ com `fetch` e `async/await` para consumir a API)
 
  
 
-* **(Create)** Adicionar novos links através de um formulário.
-
-* **(Read)** Listar todos os links cadastrados no banco de dados.
-
-* **(Update)** Editar o título e a URL de um link existente.
-
-* **(Delete)** Excluir um link da lista.
-
-* **Interface Responsiva:** Funciona perfeitamente em desktops e celulares.
+## Arquitetura
 
  
 
-## 🗄️ Endpoints da API (CRUD Completo)
+Este projeto utiliza uma arquitetura de API desacoplada:
 
  
 
-A API RESTful está na raiz do projeto (`/api`):
+1.  **Backend (`index.js`):** Um servidor Express que se conecta ao MySQL e expõe dois endpoints RESTful.
+
+2.  **Frontend (pasta `/public`):** Um cliente estático (HTML/CSS/JS) que consome a API do backend. O próprio Express serve esse frontend para facilitar.
 
  
 
-| Método | Endpoint | Descrição |
+## Endpoints da API
 
-| :--- | :--- | :--- |
+ 
 
-| `POST` | `/api/links` | **Cria** um novo link. Espera `{ "titulo": "...", "url": "..." }` no body. |
+* `GET /api/votos`
 
-| `GET` | `/api/links` | **Lê** (busca) todos os links cadastrados. |
+    * **Descrição:** Retorna a contagem de votos atual para todas as opções.
 
-| `PUT` | `/api/links/:id` | **Atualiza** um link existente. Espera `{ "titulo": "...", "url": "..." }` no body. |
+    * **Resposta:** `[ { "opcao_nome": "JavaScript", "total_votos": 5 }, ... ]`
 
-| `DELETE` | `/api/links/:id` | **Exclui** um link existente pelo seu ID. |
+ 
+
+* `POST /api/votar/:opcao`
+
+    * **Descrição:** Incrementa o contador de votos para a opção especificada na URL (ex: `/api/votar/Python`).
+
+    * **Resposta (Sucesso):** `{ "message": "Voto para Python registrado com sucesso!" }`
+
+    * **Resposta (Erro):** `{ "message": "Opção de voto não encontrada." }`
 
  
 
@@ -84,12 +82,11 @@ A API RESTful está na raiz do projeto (`/api`):
 
  
 
-### 1. Clonar e Instalar
+### 1. Clonar o Repositório
 
 ```bash
 
-git clone [https://github.com/seu-usuario/projeto-linktree.git](https://github.com/seu-usuario/projeto-linktree.git)
+git clone [https://github.com/seu-usuario/projeto-enquete.git](https://github.com/seu-usuario/projeto-enquete.git)
 
-cd projeto-linktree
+cd projeto-enquete
 
-npm install
